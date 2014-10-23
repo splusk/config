@@ -1,4 +1,4 @@
-## Scrollback
+## For Scrollback
 termcapinfo xterm* ti@:te@
 
 #terminfo and termcap for nice 256 color terminal
@@ -12,8 +12,8 @@ term xterm-256color
 ## erase background with current bg color
 defbce "on"
 
+## Comment out when running on a work unix machine
 defhstatus "screen ^E (^Et) | $USER@^EH"
-#hardstatus off
 
 # detach on hangup
 autodetach on
@@ -26,9 +26,6 @@ startup_message off
 
 #Window numbering starts at 1, not 0.
 screen 1
-#Cause sometimes I tap Ctrl-x Ctrl-c instead of just Ctrl-X c 
-bind ^c screen 1
-bind c screen 1
 #Select the right one, cause of new numbering
 bind 0 other
 
