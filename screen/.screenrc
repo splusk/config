@@ -1,0 +1,55 @@
+## Scrollback
+termcapinfo xterm* ti@:te@
+
+#terminfo and termcap for nice 256 color terminal
+## allow bold colors - necessary for some reason
+attrcolor b ".I"
+## tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+termcapinfo xterm-256color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+term xterm-256color
+## erase background with current bg color
+defbce "on"
+
+defhstatus "screen ^E (^Et) | $USER@^EH"
+#hardstatus off
+
+# detach on hangup
+autodetach on
+
+##    Misc    ##
+#shell -${SHELL}
+defscrollback 10000
+altscreen on
+startup_message off
+
+#Window numbering starts at 1, not 0.
+screen 1
+#Cause sometimes I tap Ctrl-x Ctrl-c instead of just Ctrl-X c 
+bind ^c screen 1
+bind c screen 1
+#Select the right one, cause of new numbering
+bind 0 other
+
+## KeyBindings ##
+# Rebinding first, so escape-a goes to start of line - instead of switching to last window (default behaviour)
+#escape ^A^A
+bind l windowlist
+
+msgwait 0
+
+#hardstatus string '%H: %`'
+backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | sed 's/[0-9]*//g' | sed -n 's/[^.]*.//p''
+
+# status line at the bottom, where it belongs
+#caption string "%{= kw}%Y-%m-%d;%c %{= kw}%-w%{= kG}%{+b}[%n %t]%{-b}%{= kw}%+w"
+#caption string '%{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+#caption always '%{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}[%{B} %d/%m %{W}%c %{g}]'
+## Testing
+#caption always "%{= bb}%{+b w}%n %t%h %=%l %H %c"
+#hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
+bindkey "^[[1;5I" next
+bindkey "^[[1;6I" prev
+
