@@ -151,3 +151,4 @@ nmap <F9> :set syntax=rave<CR>
 "au! Syntax newlang source /users/shane/opt/vim70/runtime/syntax/rave.vim
 "au! Syntax newlang source $VIM/universalvim
 
+let mapleader=","
