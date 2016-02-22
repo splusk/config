@@ -8,12 +8,15 @@ attrcolor b ".I"
 termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
 termcapinfo xterm-256color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
 termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
-term xterm-256color
+#term xterm-256color
 ## erase background with current bg color
-defbce "on"
+#defbce "on"
 
 ## Comment out when running on a work unix machine
-defhstatus "screen ^E (^Et) | $USER@^EH"
+#defhstatus "screen ^E (^Et) | $USER@^EH"
+
+defsilence on
+defmonitor on
 
 # detach on hangup
 autodetach on
@@ -24,10 +27,10 @@ defscrollback 10000
 altscreen on
 startup_message off
 
-#Window numbering starts at 1, not 0.
-screen 1
-#Select the right one, cause of new numbering
-bind 0 other
+## Window numbering starts at 1, not 0.
+#screen 1
+## Select the right one, cause of new numbering
+#bind 0 other
 
 ## KeyBindings ##
 # Rebinding first, so escape-a goes to start of line - instead of switching to last window (default behaviour)
@@ -40,8 +43,7 @@ msgwait 0
 backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | sed 's/[0-9]*//g' | sed -n 's/[^.]*.//p''
 
 # status line at the bottom, where it belongs
-#caption string "%{= kw}%Y-%m-%d;%c %{= kw}%-w%{= kG}%{+b}[%n %t]%{-b}%{= kw}%+w"
-#caption string '%{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+#caption always "%{= kw}%Y-%m-%d;%c %{= kw}%-w%{= kG}%{+b}[%n %t]%{-b}%{= kw}%+w"
 #caption always '%{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}[%{B} %d/%m %{W}%c %{g}]'
 ## Testing
 #caption always "%{= bb}%{+b w}%n %t%h %=%l %H %c"
@@ -50,3 +52,17 @@ backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | s
 bindkey "^[[1;5I" next
 bindkey "^[[1;6I" prev
 
+bindkey -k k2 next
+bindkey -k k1 prev
+
+# for shift UP and DOWN arrows
+ bindkey ^[[1;5A prev
+ bindkey ^[[1;5B next
+
+ # for ctrl right and left arrows
+ bindkey ^[[1;5D prev
+ bindkey ^[[1;5C next
+
+# for shift right and left arrows
+bindkey ^[[1;2D prev
+bindkey ^[[1;2C next
