@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-## Python script to help with getting X server to display properly
-
 import plac
 import logging
 import sys
