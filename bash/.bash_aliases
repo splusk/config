@@ -254,3 +254,10 @@ big-acme-build() {
     fg
     drni
 }
+git_create_remote_repo() {
+    USER=$1
+    REPO_NAME=$2
+    curl -u '$USER' https://api.github.com/user/repos -d '{"name":"$REPO_NAME"}'
+    git remote add origin https://github.com/$USER/$REPO_NAME.git
+    git push origin master
+}
