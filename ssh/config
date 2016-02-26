@@ -1,0 +1,20 @@
+### GOT ####
+Host gk
+ HostName <some-host-name-for-accessible-from-outside-world>
+ User <username>
+ Compression yes
+ CompressionLevel 9
+ ForwardX11 yes
+ ForwardAgent yes
+ LocalForward <local-port> <remote-host>:<port>
+ IdentityFile ~/.ssh/key
+
+Host work
+ HostName <some-host-name>
+ User <username>
+ Compression yes
+ CompressionLevel 9
+ ForwardX11 yes
+ ForwardAgent yes
+ IdentityFile ~/.ssh/key
+ ProxyCommand ssh gk nc <some-random-host-name> 22
