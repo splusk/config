@@ -1,4 +1,3 @@
-### GOT ####
 Host gk
  HostName <some-host-name-for-accessible-from-outside-world>
  User <username>

@@ -99,9 +99,9 @@ if !exists(":DiffOrig")
 
 endif
 
-" SHANEs 
-"set t_Co=256
-"set syntax=universal
+""""""""""""""""""
+" SHANE
+""""""""""""""""""
 set guioptions+=m
 set ignorecase
 set clipboard=unnamed
@@ -112,9 +112,11 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+" Keymappings
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-map <C-u><C-m> <C-w>= 
+map <C-u><C-m> <C-w>=
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 "map <C-w>+ <C-w>100+
@@ -133,6 +135,8 @@ map <A-6> 6gt
 map <A-7> 7gt
 map <A-8> 8gt
 map <A-9> 9gt
+let mapleader=","     "For NerdCommenter
+set timeout timeoutlen=1500
 
 " VIM-Shell
 " " Ctrl_W e opens up a vimshell in a horizontally split window
@@ -142,13 +146,11 @@ nmap <C-W>e :vnew \| vimshell bash<CR>
 nmap <C-W>t :tabnew \| vimshell bash<CR>
 set viminfo+=n$HOME/.vim/.viminfo
 
-"Colors
-"set background=dark
-colorscheme mustang
-"colorscheme wombat256
-nmap <F9> :set syntax=rave<CR>
-"au BufRead,BufNewFile * set filetype=rave
-"au! Syntax newlang source /users/shane/opt/vim70/runtime/syntax/rave.vim
-"au! Syntax newlang source $VIM/universalvim
+set encoding=utf-8
 
-let mapleader=","
+"Colors
+"set t_Co=256
+"set term=xterm
+"let &t_AB="\e[48;5;%dm"
+colorscheme mustang
+"colorscheme desert2
