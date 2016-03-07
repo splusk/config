@@ -1,0 +1,139 @@
+"" Vundle - plugin manager
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+"call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+call vundle#begin('$HOME/.vim/bundle/')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+"
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+Plugin 'scrooloose/nerdTree'
+Plugin 'The-NERD-Commenter'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+
+" Setting some decent VIM settings for programming
+
+set ai                          " set auto-indenting on for programming
+set showmatch                   " automatically show matching brackets. works like it does in bbedit.
+set vb                          " turn on the "visual bell" - which is much quieter than the "audio blink"
+set ruler                       " show the cursor position all the time
+set laststatus=2                " make the last line where the status is two lines deep so you can see status always
+set backspace=indent,eol,start  " make that backspace key work the way it should
+set nocompatible                " vi compatible is LAME
+set background=dark             " Use colours that work well on a dark background (Console is usually black)
+set showmode                    " show the current mode
+syntax on                       " turn syntax highlighting on by default
+
+" Show EOL type and last modified timestamp, right after the filename
+set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
+
+"------------------------------------------------------------------------------
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    "Set UTF-8 as the default encoding for commit messages
+    autocmd BufReadPre COMMIT_EDITMSG,git-rebase-todo setlocal fileencodings=utf-8
+
+    "Remember the positions in files with some git-specific exceptions"
+    autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$")
+      \           && expand("%") !~ "COMMIT_EDITMSG"
+      \           && expand("%") !~ "ADD_EDIT.patch"
+      \           && expand("%") !~ "addp-hunk-edit.diff"
+      \           && expand("%") !~ "git-rebase-todo" |
+      \   exe "normal g`\"" |
+      \ endif
+
+      autocmd BufNewFile,BufRead *.patch set filetype=diff
+      autocmd BufNewFile,BufRead *.diff set filetype=diff
+
+      autocmd Syntax diff
+      \ highlight WhiteSpaceEOL ctermbg=red |
+      \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
+
+      autocmd Syntax gitcommit setlocal textwidth=74
+endif " has("autocmd")
+
+""""""""""""""""""
+" SHANE
+""""""""""""""""""
+set guioptions+=m
+set ignorecase
+set clipboard=unnamed
+set showmatch
+set nobackup
+"set number
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Keymappings
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-u><C-m> <C-w>=
+nmap t% :tabedit %<CR>
+nmap td :tabclose<CR>
+"map <C-w>+ <C-w>100+
+"map <C-w>- <C-w>100-
+"map <C-w>> <C-w>100>
+"map <C-w>< <C-w>100<
+map <C-e> $
+map <C-a> ^
+" Tab Control (others)
+map t1 1gt
+map t2 2gt
+map t3 3gt
+map t4 4gt
+map t5 5gt
+map <A-6> 6gt
+map <A-7> 7gt
+map <A-8> 8gt
+map <A-9> 9gt
+let mapleader=","     "For NerdCommenter
+set timeout timeoutlen=1500
+
+" VIM-Shell
+" " Ctrl_W e opens up a vimshell in a horizontally split window
+" " Ctrl_W E opens up a vimshell in a vertically split window
+" " The shell window will be auto closed after termination
+nmap <C-W>e :vnew \| vimshell bash<CR>
+nmap <C-W>t :tabnew \| vimshell bash<CR>
+set viminfo+=n$HOME/.vim/.viminfo
+
+set encoding=utf-8
+
+"Colors
+"set t_Co=256
+"set term=xterm
+"let &t_AB="\e[48;5;%dm"
+colorscheme desert2
+"colorscheme industry
